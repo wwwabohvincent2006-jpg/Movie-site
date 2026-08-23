@@ -1,0 +1,77 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    font-family: sans-serif;
+}
+
+/* Navigation */
+.topnav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    padding: 10px 16px;
+}
+
+.topnav a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.search-container {
+    margin-left: auto;
+}
+
+form {
+    background-color: #151f30;
+    width: 180px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+input {
+    all: unset;
+    font: 15px system-ui;
+    color: white;
+    height: 100%;
+    width: 100%;
+    padding: 6px 9px;
+}
+
+/* Movie column */
+.column {
+    float: left;
+    width: 300px;
+    padding: 10px;
+}
+
+/* Movie card */
+.card {
+    width: 100%;
+    border-radius: 20px;
+    padding: 15px;
+    text-align: center;
+    background-color: #151f30;
+}
+
+/* Movie image */
+.thumbnail {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 19px;
+}
+
+/* Movie title */
+h3 {
+    color: white;
+    margin: 12px 0 5px;
+    text-align: center;
+}
