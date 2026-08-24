@@ -1,1 +1,93 @@
+const API_KEY = "703076e4033126088d57de2c899453ed";
 
+const APILINK =
+    `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${703076e4033126088d57de2c899453ed}&page=1`;
+
+const IMG_PATH =
+    "https://image.tmdb.org/t/p/w500";
+
+const SEARCHAPI =
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=`;
+
+const main = document.getElementById("section");
+const form = document.getElementById("form");
+const SEARCH = document.getElementById("query");
+
+
+// Load popular movies when the website opens
+returnMovies(APILINK);
+
+
+function returnMovies(url) {
+
+    fetch(url)
+        .then(res => res.json())
+        .then(function(data) {
+
+            console.log(data.results);
+
+            data.results.forEach(element => {
+
+                // Create row
+                const div_row = document.createElement("div");
+                div_row.setAttribute("class", "row");
+
+                // Create column
+                const div_column = document.createElement("div");
+                div_column.setAttribute("class", "column");
+
+                // Create card
+                const div_card = document.createElement("div");
+                div_card.setAttribute("class", "card");
+
+                // Create image
+                const image = document.createElement("img");
+                image.setAttribute("class", "thumbnail");
+                image.setAttribute("alt", element.title);
+
+                // Create title
+                const title = document.createElement("h3");
+                title.innerHTML = element.title;
+
+                // Add movie poster
+                if (element.poster_path) {
+                    image.src = IMG_PATH + element.poster_path;
+                } else {
+                    image.src =
+                        "https://via.placeholder.com/500x750?text=No+Poster";
+                }
+
+                // Put everything together
+                div_card.appendChild(image);
+                div_card.appendChild(title);
+
+                div_column.appendChild(div_card);
+                div_row.appendChild(div_column);
+
+                main.appendChild(div_row);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading movies:", error);
+        });
+}
+
+
+// Search movies
+form.addEventListener("submit", (e) => {
+
+    e.preventDefault();
+
+    main.innerHTML = "";
+
+    const searchItem = SEARCH.value.trim();
+
+    if (searchItem) {
+
+        returnMovies(
+            SEARCHAPI + encodeURIComponent(searchItem)
+        );
+
+        SEARCH.value = "";
+    }
+});
